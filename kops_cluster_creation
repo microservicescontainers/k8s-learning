@@ -1,0 +1,37 @@
+export NAME=<clustername>
+
+export KOPS_STATE_STORE=s3://<s3-bucket-name>
+
+aws ec2 describe-availability-zones --region us-east-1
+
+kops create cluster --zones us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f ${NAME}
+
+ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa
+
+kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
+
+kops edit cluster ${NAME}
+-------------------------
+ kubelet:
+    anonymousAuth: false
+    authenticationTokenWebhook: true
+    authorizationMode: Webhook
+
+Change Worker Node configuration:
+---------------------------------
+kops edit ig nodes --name ${NAME}
+
+Change Master Node configuration:
+---------------------------------
+kops edit ig master-us-east-1a --name ${NAME}
+
+
+Get Information about nodes :
+-----------------------------
+kops get ig --name ${NAME}
+
+
+Build the Cluster:
+------------------
+kops update cluster ${NAME} --yes
+
