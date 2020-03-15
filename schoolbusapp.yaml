@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: schoolbusapp
+    env: test
+  name: schoolbusapp
+spec:
+  containers:
+  - image: microservicescontainers/schoolbusapp
+    name: schoolbusapp
+    ports:
+      - containerPort: 8080
+  restartPolicy: Never
