@@ -1,3 +1,6 @@
+Configure KOPS:
+---------------
+
 export NAME=<clustername>
 
 export KOPS_STATE_STORE=s3://<s3-bucket-name>
