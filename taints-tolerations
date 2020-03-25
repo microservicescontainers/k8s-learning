@@ -1,0 +1,25 @@
+
+https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+
+Use taints you can mark nodes with specific property , which decides whether a pod will be executed on that node .i.e will the pod tolerate the taint on the node.
+
+1. By default worker nodes do not have any taints.
+2. By default master node has a taint , 
+    Taints: node-role.kubernetes.io/master:NoSchedule
+3.How to taint a node ?
+   kubectl taint nodes <node-name> <key>=<value>:<action>
+   action can be one of these 3 - NoSchedule , PreferNoSchedule , NoExecute
+   
+   eg : kubectl taint nodes ip-172-20-136-112.ec2.internal donotprefer=nginxpods:NoSchedule
+
+using json to read nodes info :
+------------------------------
+kubectl get nodes -o json > nodesjson.json
+http://jsonviewer.stack.hu/
+
+Quick json reading:
+-------------------
+kubectl get nodes -o json | jq '.items[].spec' -> to see all taints
+kubectl get nodes -o json | jq '.items[].metadata.labels' -> to see all labels
+
+
