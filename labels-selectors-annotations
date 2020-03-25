@@ -1,0 +1,37 @@
+kubectl get po --show-lables
+
+kubectl get po --selector <label-key=label-value>,<label-key=label-value>,.
+eg: kubectl get po --selector env=test,run=schoolbusapp
+
+kubectl get po --selector <label-key>,<label-key>,..
+eg: kubectl  get po --selector app,class,environment
+
+kubectl get po --selector <label-key>,<label-key=label-value>,.
+eg: kubectl  get po --selector env=test,run
+
+kubectl run --restart=Never <pod-name> --image=<image-name>
+eg: kubectl run --restart=Never tomcatb --image=tomcat
+
+
+Annotations Example:
+----------------------------------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: schoolbusapp
+    env: test
+  name: schoolbusapp
+  annotations:
+   revision: 1.0.12
+   developers: paravlika-sandhya
+spec:
+  containers:
+  - image: microservicescontainers/schoolbusapp
+    name: schoolbusapp
+    ports:
+      - containerPort: 8080
+  restartPolicy: Never
+  -------------------------------------------------
+  https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  
