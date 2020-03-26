@@ -10,7 +10,7 @@ Use taints you can mark nodes with specific property , which decides whether a p
    kubectl taint nodes <node-name> <key>=<value>:<action>
    action can be one of these 3 - NoSchedule , PreferNoSchedule , NoExecute
    
-   eg : kubectl taint nodes ip-172-20-136-112.ec2.internal donotprefer=nginxpods:NoSchedule
+   eg : kubectl taint nodes ip-172-20-136-112.ec2.internal dept=engineering:NoSchedule
 
 using json to read nodes info :
 ------------------------------
